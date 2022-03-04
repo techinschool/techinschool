@@ -2,12 +2,7 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home/u3125820/public_html/
-    - /bin/cp -r assets $DEPLOYPATH
-    - /bin/cp -r config $DEPLOYPATH
-    - /bin/cp -r content $DEPLOYPATH
-    - /bin/cp -r data $DEPLOYPATH
-    - /bin/cp -r resources $DEPLOYPATH
-    - /bin/cp -r static $DEPLOYPATH
-    - /bin/cp go.mod $DEPLOYPATH
-    - /bin/cp go.sum $DEPLOYPATH
-    - /bin/cp netlify.toml $DEPLOYPATH
+    - ./bin/hugo --minify
+    - rsync -az public/* $DEPLOYPATH --delete
+    - rm -rf public/
+    - git push -u origin --all
